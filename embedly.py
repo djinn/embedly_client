@@ -31,6 +31,7 @@ URL_SCHEMES_RE = (
     r'^http://screenr.com/.+',
     r'^http://twitpic\.com/.*',
     r'^http://.*\.youtube\.com/watch.*',
+    r'^http://.*\.youtube\.com/v.*',
     r'^http://yfrog.com.*',
     r'^http://.*amazon.*/gp/product/.*$',
     r'^http://.*amazon\..*/.*/dp/.*$',
