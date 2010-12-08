@@ -16,6 +16,10 @@ except ImportError:
 # Embed.ly Multi Provider API Endpoint
 OEMBED_API_ENDPOINT = 'http://api.embed.ly/v1/api/oembed'
 
+
+class ResourceNotMatchingURL(Exception):
+    pass
+
 # URL Schemes Supported
 URL_SCHEMES_RE = (
     r'^http://www\.5min\.com/Video/.*',
@@ -30,8 +34,9 @@ URL_SCHEMES_RE = (
     r'^http:/.*\.movieclips\.com/watch/.*',
     r'^http://screenr.com/.+',
     r'^http://twitpic\.com/.*',
-    r'^http://.*\.youtube\.com/watch.*',
-    r'^http://.*\.youtube\.com/v.*',
+    r'^http://.*\youtube\.com/watch.*',
+    r'^http://.*\youtube\.com/watch/.*',
+    r'^http://.*\youtube\.com/v.*',
     r'^http://yfrog.com.*',
     r'^http://.*amazon.*/gp/product/.*$',
     r'^http://.*amazon\..*/.*/dp/.*$',
@@ -70,7 +75,7 @@ def get_oembed(url, format='json', maxwidth=None, maxheight=None):
 
     # make sure embed.ly supports the url scheme
     if not is_pattern_match(url):
-       return None
+       raise ResourceNotMatchingURL()
 
     # gather url, format, maxwidth or maxheight options for embed sizing
     params = {"url": url}
